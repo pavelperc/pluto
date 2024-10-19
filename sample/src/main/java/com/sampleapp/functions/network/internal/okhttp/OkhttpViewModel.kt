@@ -25,6 +25,63 @@ class OkhttpViewModel : ViewModel() {
         }
     }
 
+    fun graphqlQuery() {
+        viewModelScope.launch {
+            // todo, better mock requests
+            enqueue {
+                apiService.graphql(
+                    mapOf(
+                        "query" to "query Launches(\$limit: Int){launches(limit: \$limit){mission_name}}",
+                        "variables" to mapOf("limit" to 3),
+                        "operationName" to "Launches",
+                    )
+                )
+            }
+        }
+    }
+
+    fun graphqlQueryError() {
+        viewModelScope.launch {
+            enqueue {
+                apiService.graphql(
+                    mapOf(
+                        "query" to "query Launches(\$limit: Int){launches(limit: \$limit){mission_name}}",
+                        "variables" to mapOf("limit" to -1111),
+                        "operationName" to "Launches",
+                    )
+                )
+            }
+        }
+    }
+
+    fun graphqlMutation() {
+        viewModelScope.launch {
+            enqueue {
+                apiService.graphql(
+                    mapOf(
+                        "query" to "mutation Insert_users(\$objects: [users_insert_input!]!) {insert_users(objects: \$objects) {affected_rows}}",
+                        "variables" to mapOf("objects" to emptyList<Any>()),
+                        "operationName" to "Insert_users",
+                    )
+                )
+            }
+        }
+    }
+
+    fun graphqlMutationError() {
+        viewModelScope.launch {
+            enqueue {
+                apiService.graphql(
+                    mapOf(
+                        "query" to "mutation Insert_users(\$objects: [users_insert_input!]!) {insert_users112231321(objects: \$objects) {affected_rows}}",
+                        "variables" to mapOf("objects" to emptyList<Any>()),
+                        "operationName" to "Insert_users",
+                    )
+                )
+            }
+        }
+    }
+
     fun post() {
         val label = "POST call"
         viewModelScope.launch {

@@ -30,4 +30,7 @@ interface ApiService {
     )
     @POST("xml")
     suspend fun xml(@Body hashMapOf: RequestBody): Any
+
+    @POST("https://spacex-production.up.railway.app/")
+    suspend fun graphql(@Body body: Any): Any
 }
