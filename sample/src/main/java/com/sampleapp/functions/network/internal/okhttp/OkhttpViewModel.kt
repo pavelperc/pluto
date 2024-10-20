@@ -27,13 +27,12 @@ class OkhttpViewModel : ViewModel() {
 
     fun graphqlQuery() {
         viewModelScope.launch {
-            // todo, better mock requests
+            // todo, better mock responses
             enqueue {
                 apiService.graphql(
                     mapOf(
                         "query" to "query Launches(\$limit: Int){launches(limit: \$limit){mission_name}}",
                         "variables" to mapOf("limit" to 3),
-                        "operationName" to "Launches",
                     )
                 )
             }
@@ -47,7 +46,6 @@ class OkhttpViewModel : ViewModel() {
                     mapOf(
                         "query" to "query Launches(\$limit: Int){launches(limit: \$limit){mission_name}}",
                         "variables" to mapOf("limit" to -1111),
-                        "operationName" to "Launches",
                     )
                 )
             }
@@ -61,7 +59,6 @@ class OkhttpViewModel : ViewModel() {
                     mapOf(
                         "query" to "mutation Insert_users(\$objects: [users_insert_input!]!) {insert_users(objects: \$objects) {affected_rows}}",
                         "variables" to mapOf("objects" to emptyList<Any>()),
-                        "operationName" to "Insert_users",
                     )
                 )
             }
@@ -75,7 +72,6 @@ class OkhttpViewModel : ViewModel() {
                     mapOf(
                         "query" to "mutation Insert_users(\$objects: [users_insert_input!]!) {insert_users112231321(objects: \$objects) {affected_rows}}",
                         "variables" to mapOf("objects" to emptyList<Any>()),
-                        "operationName" to "Insert_users",
                     )
                 )
             }

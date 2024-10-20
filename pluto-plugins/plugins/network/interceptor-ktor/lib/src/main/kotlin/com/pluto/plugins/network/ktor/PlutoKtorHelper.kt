@@ -19,7 +19,8 @@ private val saveAttributeKey = AttributeKey<Unit>("ResponseBodySaved")
 fun HttpClient.addPlutoKtorInterceptor() {
     plugin(HttpSend).intercept { requestUnBuilt ->
         val request = requestUnBuilt.build()
-        val networkInterceptor = NetworkInterceptor.intercept(request.convert(), NetworkInterceptor.Option(NAME))
+        val convertedRequest = request.convert()
+        val networkInterceptor = NetworkInterceptor.intercept(convertedRequest, NetworkInterceptor.Option(NAME))
         val callResult = try {
             requestUnBuilt.url(networkInterceptor.actualOrMockRequestUrl)
             execute(requestUnBuilt)
@@ -34,7 +35,7 @@ fun HttpClient.addPlutoKtorInterceptor() {
             newCall.attributes.put(saveAttributeKey, Unit)
             newCall
         }
-        networkInterceptor.onResponse(res.response.convert())
+        networkInterceptor.onResponse(res.response.convert(convertedRequest))
         res
     }
 }

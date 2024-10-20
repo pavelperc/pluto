@@ -12,6 +12,7 @@ import java.io.IOException
 
 class ResponseReportingSinkCallback(
     private val response: Response,
+    private val request: NetworkData.Request,
     private val onComplete: (NetworkData.Response) -> Unit
 ) : ReportingSink.Callback {
 
@@ -20,7 +21,7 @@ class ResponseReportingSinkCallback(
             readResponseBuffer(f, response.isGzipped)?.let {
                 val responseBody = response.body ?: return
                 val body = responseBody.processBody(it)
-                onComplete.invoke(response.convert(body))
+                onComplete.invoke(response.convert(request, body))
             }
             f.delete()
         }

@@ -1,5 +1,6 @@
 package com.pluto.plugins.network.ktor.internal
 
+import com.pluto.plugins.network.intercept.NetworkData
 import com.pluto.plugins.network.intercept.NetworkData.Body
 import com.pluto.plugins.network.intercept.NetworkData.Response
 import io.ktor.client.statement.HttpResponse
@@ -9,15 +10,16 @@ import io.ktor.http.Headers
 import io.ktor.http.contentType
 
 internal object KtorResponseConverter : ResponseConverter<HttpResponse> {
-    override suspend fun HttpResponse.convert(): Response {
+    override suspend fun HttpResponse.convert(request: NetworkData.Request): Response {
         return Response(
+            request = request,
             statusCode = status.value,
             body = extractBody(),
             protocol = version.name,
             fromDiskCache = false,
             headers = headersMap(headers),
             sentTimestamp = requestTime.timestamp,
-            receiveTimestamp = responseTime.timestamp
+            receiveTimestamp = responseTime.timestamp,
         )
     }
 
