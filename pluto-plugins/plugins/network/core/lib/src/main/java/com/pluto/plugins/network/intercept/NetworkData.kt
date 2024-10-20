@@ -16,7 +16,7 @@ class NetworkData {
     ) {
         data class GraphqlData(
             val queryType: String,
-            val queryName: String,
+            val queryNameWithVariables: String,
         )
 
         val graphqlData: GraphqlData? = parseGraphqlData()
@@ -29,12 +29,17 @@ class NetworkData {
             ) return null
             val json = runCatching { JSONObject(body!!.body.toString()) }.getOrNull() ?: return null
             val query = json.optString("query") ?: return null
+            val variables = json.optJSONObject("variables")
             val match = graqphlQueryRegex.find(query)?.groupValues ?: return null
             return GraphqlData(
                 queryType = match[1],
-                queryName = match[2],
+                queryNameWithVariables = match[2] + variables?.formatVariables().orEmpty(),
             )
         }
+
+        private fun JSONObject.formatVariables() =
+            keys().asSequence().joinToString { "$it: ${get(it)}" }.let { " ($it)" }
+
 
         internal val isGzipped: Boolean
             get() = headers["Content-Encoding"].equals("gzip", ignoreCase = true)

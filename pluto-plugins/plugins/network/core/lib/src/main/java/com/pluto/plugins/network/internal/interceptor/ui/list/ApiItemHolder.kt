@@ -40,7 +40,7 @@ internal class ApiItemHolder(parent: ViewGroup, actionListener: DiffAwareAdapter
             binding.root.setBackgroundColor(context.color(R.color.pluto___transparent))
 
             val method = (item.request.graphqlData?.queryType ?: item.request.method).uppercase()
-            val urlOrQuery = item.request.graphqlData?.queryName ?: Url(item.request.url).encodedPath
+            val urlOrQuery = item.request.graphqlData?.queryNameWithVariables ?: Url(item.request.url).encodedPath
             graphqlIcon.isVisible = item.request.graphqlData != null
 
             url.setSpan {
