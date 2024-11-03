@@ -30,8 +30,8 @@ class OkhttpViewModel : ViewModel() {
             enqueue {
                 apiService.graphql(
                     mapOf(
-                        "query" to "query Launches(\$limit: Int){launches(limit: \$limit){mission_name}}",
-                        "variables" to mapOf("limit" to 3),
+                        GQL_QUERY to "query Launches(\$limit: Int){launches(limit: \$limit){mission_name}}",
+                        GQL_VARIABLES to mapOf("limit" to GQL_LIMIT_VALID),
                     )
                 )
             }
@@ -43,8 +43,8 @@ class OkhttpViewModel : ViewModel() {
             enqueue {
                 apiService.graphql(
                     mapOf(
-                        "query" to "query Launches(\$limit: Int){launches(limit: \$limit){mission_name}}",
-                        "variables" to mapOf("limit" to -1111),
+                        GQL_QUERY to "query Launches(\$limit: Int){launches(limit: \$limit){mission_name}}",
+                        GQL_VARIABLES to mapOf("limit" to GQL_LIMIT_INVALID),
                     )
                 )
             }
@@ -56,8 +56,8 @@ class OkhttpViewModel : ViewModel() {
             enqueue {
                 apiService.graphql(
                     mapOf(
-                        "query" to "mutation Insert_users(\$objects: [users_insert_input!]!) {insert_users(objects: \$objects) {affected_rows}}",
-                        "variables" to mapOf("objects" to emptyList<Any>()),
+                        GQL_QUERY to "mutation Insert_users(\$objects: [users_insert_input!]!) {insert_users(objects: \$objects) {affected_rows}}",
+                        GQL_VARIABLES to mapOf("objects" to emptyList<Any>()),
                     )
                 )
             }
@@ -69,8 +69,8 @@ class OkhttpViewModel : ViewModel() {
             enqueue {
                 apiService.graphql(
                     mapOf(
-                        "query" to "mutation Insert_users(\$objects: [users_insert_input!]!) {insert_users112231321(objects: \$objects) {affected_rows}}",
-                        "variables" to mapOf("objects" to emptyList<Any>()),
+                        GQL_QUERY to "mutation Insert_users(\$objects: [users_insert_input!]!) {insert_users112231321(objects: \$objects) {affected_rows}}",
+                        GQL_VARIABLES to mapOf("objects" to emptyList<Any>()),
                     )
                 )
             }
@@ -130,5 +130,12 @@ class OkhttpViewModel : ViewModel() {
                 }
             )
         }
+    }
+
+    companion object {
+        private const val GQL_QUERY = "query"
+        private const val GQL_LIMIT_VALID = 3
+        private const val GQL_LIMIT_INVALID = -1111
+        private const val GQL_VARIABLES = "variables"
     }
 }

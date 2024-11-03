@@ -45,7 +45,7 @@ internal class ApiItemHolder(parent: ViewGroup, actionListener: DiffAwareAdapter
 
             url.setSpan {
                 append(fontColor(method, context.color(R.color.pluto___text_dark_60)))
-                append("  ${urlOrQuery}")
+                append("  $urlOrQuery")
             }
             progress.visibility = VISIBLE
             status.visibility = INVISIBLE

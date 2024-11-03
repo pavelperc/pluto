@@ -11,6 +11,7 @@ class NetworkData {
     )
 
     data class Response(
+        val request: Request,
         val statusCode: Int,
         val body: Body?,
         val headers: Map<String, String?>,
