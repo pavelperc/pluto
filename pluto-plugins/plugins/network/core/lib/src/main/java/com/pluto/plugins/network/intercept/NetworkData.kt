@@ -50,7 +50,7 @@ class NetworkData {
         val protocol: String = "",
         val fromDiskCache: Boolean = false,
     ) {
-        val hasGraphqlErrors = parseHasGraphqlError()
+        val hasGraphqlErrors = parseHasGraphqlErrors()
 
         internal val status: Status
             get() = Status(statusCode, getStatusMessage())
@@ -62,7 +62,7 @@ class NetworkData {
         private fun getStatusMessage() = mapCode2Message(statusCode) +
                 if (hasGraphqlErrors) ", Response with errors" else ""
 
-        private fun parseHasGraphqlError(): Boolean {
+        private fun parseHasGraphqlErrors(): Boolean {
             if (request.graphqlData == null ||
                 body == null ||
                 body.isBinary ||

@@ -27,7 +27,6 @@ class OkhttpViewModel : ViewModel() {
 
     fun graphqlQuery() {
         viewModelScope.launch {
-            // todo, better mock responses
             enqueue {
                 apiService.graphql(
                     mapOf(
