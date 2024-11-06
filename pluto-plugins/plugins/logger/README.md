@@ -2,13 +2,13 @@
 
 
 ### Add Gradle Dependencies
-Pluto Logger is distributed through [***mavenCentral***](https://central.sonatype.com/artifact/com.plutolib.plugins/logger). To use it, you need to add the following Gradle dependency to your build.gradle file of you android app module.
+Pluto Logger is distributed through [***mavenCentral***](https://central.sonatype.com/artifact/com.pavelperc.pluto.plugins/logger). To use it, you need to add the following Gradle dependency to your build.gradle file of you android app module.
 
 > Note: add the `no-op` variant to isolate the plugin from release builds.
 ```groovy
 dependencies {
-  debugImplementation "com.plutolib.plugins:logger:$plutoVersion"
-  releaseImplementation "com.plutolib.plugins:logger-no-op:$plutoVersion"
+  debugImplementation "com.pavelperc.pluto.plugins:logger:$plutoVersion"
+  releaseImplementation "com.pavelperc.pluto.plugins:logger-no-op:$plutoVersion"
 }
 ```
 <br>

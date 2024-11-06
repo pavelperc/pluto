@@ -12,7 +12,7 @@ def verCode, verName, verBuild, verNameShort, verPublish
 (verCode, verName, verBuild, verNameShort, verPublish) = genVersion()
 
 ext {
-    PUBLISH_GROUP_ID = "com.plutolib.plugins"
+    PUBLISH_GROUP_ID = "com.pavelperc.pluto.plugins"
     PUBLISH_VERSION = verPublish
     PUBLISH_ARTIFACT_ID = "network-interceptor-okhttp"
 }
@@ -56,7 +56,7 @@ android {
 }
 
 dependencies {
-//    implementation 'com.plutolib:plugin:2.0.0'
+//    implementation 'com.pavelperc.pluto:plugin:2.0.0'
     implementation project(':pluto-plugins:base:lib')
     implementation project(':pluto-plugins:plugins:network:core:lib')
 

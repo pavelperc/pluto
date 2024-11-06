@@ -79,19 +79,19 @@ dependencies {
     debugImplementation project(path: ':pluto-plugins:bundle:lib')
 
     /* Maven Op dependencies */
-    debugMavenImplementation "com.plutolib:pluto:$verPublish"
-    debugMavenImplementation "com.plutolib.plugins:bundle-core:$verPublish"
+    debugMavenImplementation "com.pavelperc.pluto:pluto:$verPublish"
+    debugMavenImplementation "com.pavelperc.pluto.plugins:bundle-core:$verPublish"
 
     /* Local NoOp dependencies */
     debugNoOpImplementation project(path: ':pluto:lib-no-op')
     debugNoOpImplementation project(path: ':pluto-plugins:bundle:lib-no-op')
 
     /* Maven NoOp dependencies */
-    debugNoOpMavenImplementation "com.plutolib:pluto-no-op:$verPublish"
-    debugNoOpMavenImplementation "com.plutolib.plugins:bundle-core-no-op:$verPublish"
+    debugNoOpMavenImplementation "com.pavelperc.pluto:pluto-no-op:$verPublish"
+    debugNoOpMavenImplementation "com.pavelperc.pluto.plugins:bundle-core-no-op:$verPublish"
 
-    releaseImplementation "com.plutolib:pluto:$verPublish"
-    releaseImplementation "com.plutolib.plugins:bundle-core:$verPublish"
+    releaseImplementation "com.pavelperc.pluto:pluto:$verPublish"
+    releaseImplementation "com.pavelperc.pluto.plugins:bundle-core:$verPublish"
 
     /**
      * Other dependencies

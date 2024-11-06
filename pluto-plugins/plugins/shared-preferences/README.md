@@ -2,13 +2,13 @@
 
 
 ### Add Gradle Dependencies
-Pluto Shared Preferences is distributed through [***mavenCentral***](https://central.sonatype.com/artifact/com.plutolib.plugins/preferences). To use it, you need to add the following Gradle dependency to your build.gradle file of you android app module.
+Pluto Shared Preferences is distributed through [***mavenCentral***](https://central.sonatype.com/artifact/com.pavelperc.pluto.plugins/preferences). To use it, you need to add the following Gradle dependency to your build.gradle file of you android app module.
 
 > Note: add the `no-op` variant to isolate the plugin from release builds.
 ```groovy
 dependencies {
-  debugImplementation "com.plutolib.plugins:preferences:$plutoVersion"
-  releaseImplementation "com.plutolib.plugins:preferences-no-op:$plutoVersion"
+  debugImplementation "com.pavelperc.pluto.plugins:preferences:$plutoVersion"
+  releaseImplementation "com.pavelperc.pluto.plugins:preferences-no-op:$plutoVersion"
 }
 ```
 <br>

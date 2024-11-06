@@ -2,13 +2,13 @@
 
 
 ### Add Gradle Dependencies
-Pluto Network is distributed through [***mavenCentral***](https://central.sonatype.com/artifact/com.plutolib.plugins/network). To use it, you need to add the following Gradle dependency to your build.gradle file of you android app module.
+Pluto Network is distributed through [***mavenCentral***](https://central.sonatype.com/artifact/com.pavelperc.pluto.plugins/network). To use it, you need to add the following Gradle dependency to your build.gradle file of you android app module.
 
 > Note: add the `no-op` variant to isolate the plugin from release builds.
 ```groovy
 dependencies {
-  debugImplementation "com.plutolib.plugins:network:$plutoVersion"
-  releaseImplementation "com.plutolib.plugins:network-no-op:$plutoVersion"
+  debugImplementation "com.pavelperc.pluto.plugins:network:$plutoVersion"
+  releaseImplementation "com.pavelperc.pluto.plugins:network-no-op:$plutoVersion"
 }
 ```
 <br>
@@ -31,8 +31,8 @@ Pluto.Installer(this)
 Add okhttp-interceptor dependency
 ```groovy
 dependencies {
-  debugImplementation "com.plutolib.plugins:network-interceptor-okhttp:$plutoVersion"
-  releaseImplementation "com.plutolib.plugins:network-interceptor-okhttp-no-op:$plutoVersion"
+  debugImplementation "com.pavelperc.pluto.plugins:network-interceptor-okhttp:$plutoVersion"
+  releaseImplementation "com.pavelperc.pluto.plugins:network-interceptor-okhttp-no-op:$plutoVersion"
 }
 ```
 
@@ -48,8 +48,8 @@ val client = OkHttpClient.Builder()
 Add ktor-interceptor dependency
 ```groovy
 dependencies {
-  debugImplementation "com.plutolib.plugins:network-interceptor-ktor:$plutoVersion"
-  releaseImplementation "com.plutolib.plugins:network-interceptor-ktor-no-op:$plutoVersion"
+  debugImplementation "com.pavelperc.pluto.plugins:network-interceptor-ktor:$plutoVersion"
+  releaseImplementation "com.pavelperc.pluto.plugins:network-interceptor-ktor-no-op:$plutoVersion"
 }
 ```
 
