@@ -45,39 +45,49 @@ afterEvaluate {
                 artifact androidSourcesJar
                 artifact javadocJar
 
-                pom {
-                    name = PUBLISH_ARTIFACT_ID
-                    description = 'Pluto is a on-device debugger for Android applications, which helps in inspection of HTTP requests/responses, capture Crashes and ANRs and manipulating application data on-the-go.'
-                    url = 'https://androidpluto.com'
-                    licenses {
-                        license {
-                            name = 'The Apache Software License, Version 2.0'
-                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                        }
-                    }
-                    developers {
-                        developer {
-                            id = 'srtvprateek'
-                            name = 'Prateek Srivastava'
-                            email = 'srtv.prateek@gmail.com'
-                        }
-                    }
-                    scm {
-                        connection = 'https://github.com/androidPluto/pluto'
-                        developerConnection = 'https://github.com/srtvprateek'
-                        url = 'https://github.com/androidPluto/pluto'
-                    }
+//                pom {
+//                    name = PUBLISH_ARTIFACT_ID
+//                    description = 'Pluto is a on-device debugger for Android applications, which helps in inspection of HTTP requests/responses, capture Crashes and ANRs and manipulating application data on-the-go.'
+//                    url = 'https://androidpluto.com'
+//                    licenses {
+//                        license {
+//                            name = 'The Apache Software License, Version 2.0'
+//                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//                        }
+//                    }
+//                    developers {
+//                        developer {
+//                            id = 'srtvprateek'
+//                            name = 'Prateek Srivastava'
+//                            email = 'srtv.prateek@gmail.com'
+//                        }
+//                    }
+//                    scm {
+//                        connection = 'https://github.com/androidPluto/pluto'
+//                        developerConnection = 'https://github.com/srtvprateek'
+//                        url = 'https://github.com/androidPluto/pluto'
+//                    }
+//                }
+            }
+        }
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = "https://maven.pkg.github.com/pavelperc/pluto"
+                credentials {
+                    username = System.getenv("GITHUB_ACTOR")
+                    password = System.getenv("GITHUB_TOKEN")
                 }
             }
         }
     }
 }
 
-signing {
-    useInMemoryPgpKeys(
-            rootProject.ext["signing.keyId"],
-            rootProject.ext["signing.key"],
-            rootProject.ext["signing.password"]
-    )
-    sign publishing.publications
-}
+//signing {
+//    useInMemoryPgpKeys(
+//            rootProject.ext["signing.keyId"],
+//            rootProject.ext["signing.key"],
+//            rootProject.ext["signing.password"]
+//    )
+//    sign publishing.publications
+//}
