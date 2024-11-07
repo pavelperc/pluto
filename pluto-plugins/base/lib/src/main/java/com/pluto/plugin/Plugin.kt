@@ -3,8 +3,6 @@ package com.pluto.plugin
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
-import android.widget.Toast
-import android.widget.Toast.LENGTH_SHORT
 import androidx.annotation.Keep
 import androidx.fragment.app.Fragment
 
@@ -51,6 +49,6 @@ abstract class Plugin(val identifier: String) : PluginEntity(identifier) {
 
     @SuppressWarnings("UnusedPrivateMember")
     fun onPluginViewCreated(savedInstanceState: Bundle?) {
-        Toast.makeText(context, "View switched to ${getConfig().name}", LENGTH_SHORT).show()
+        // nothing
     }
 }
