@@ -64,7 +64,6 @@ object Pluto {
                 intent = Intent(application.applicationContext, PlutoActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
                 intent.putExtra(ID_LABEL, identifier)
                 intent.putExtra(BUNDLE_LABEL, bundle)
                 application.applicationContext.startActivity(intent)
