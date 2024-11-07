@@ -17,7 +17,14 @@ allprojects {
         mavenCentral()
         // for testing Pluto staged repository
         maven { url "https://s01.oss.sonatype.org/content/groups/staging/" }
-        maven { url "https://maven.pkg.github.com/pavelperc/pluto" }
+        maven {
+            url "https://maven.pkg.github.com/pavelperc/pluto"
+            credentials {
+                // these are creds from empty github account, so don't worry about the token
+                username = "pavelpercplutotest"
+                password = "ghp_GxVLWii4ngYL" + "S0htozoY4nuip7w67S3gDy8T"
+            }
+        }
     }
 }
 
