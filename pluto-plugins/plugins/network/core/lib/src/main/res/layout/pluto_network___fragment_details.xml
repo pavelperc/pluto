@@ -108,16 +108,30 @@
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/pluto___margin_medium">
 
+            <ImageView
+                android:id="@+id/graphqlIcon"
+                android:layout_width="@dimen/pluto___text_small"
+                android:layout_height="@dimen/pluto___text_small"
+                android:layout_marginStart="@dimen/pluto___margin_medium"
+                android:src="@drawable/pluto_network___ic_graphql"
+                app:layout_constraintBottom_toBottomOf="@id/method"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/method" />
+
             <TextView
                 android:id="@+id/method"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/pluto___margin_medium"
+                android:layout_marginStart="@dimen/pluto___margin_mini"
                 android:layout_marginTop="@dimen/pluto___margin_medium"
+                android:layout_marginEnd="@dimen/pluto___margin_medium"
                 android:fontFamily="@font/muli_bold"
                 android:textColor="@color/pluto___dark"
                 android:textSize="@dimen/pluto___text_xmedium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/graphqlIcon"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_goneMarginStart="@dimen/pluto___margin_medium"
                 tools:text="POST" />
 
             <TextView
@@ -126,11 +140,37 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/pluto___margin_medium"
                 android:layout_marginTop="@dimen/pluto___margin_micro"
+                android:ellipsize="end"
                 android:fontFamily="@font/muli"
+                android:maxLines="5"
                 android:textColor="@color/pluto___dark_60"
                 android:textSize="@dimen/pluto___text_xmedium"
                 app:layout_constraintTop_toBottomOf="@+id/method"
                 tools:text="POST" />
+
+            <TextView
+                android:id="@+id/graphqlErrorsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/pluto___margin_medium"
+                android:layout_marginTop="@dimen/pluto___margin_micro"
+                android:fontFamily="@font/muli_bold"
+                android:text="Errors"
+                android:textColor="@color/pluto___red_dark"
+                android:textSize="@dimen/pluto___text_xmedium"
+                app:layout_constraintTop_toBottomOf="@+id/url" />
+
+            <TextView
+                android:id="@+id/graphqlErrors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/pluto___margin_medium"
+                android:layout_marginTop="@dimen/pluto___margin_micro"
+                android:fontFamily="@font/muli"
+                android:textColor="@color/pluto___red_dark"
+                android:textSize="@dimen/pluto___text_xmedium"
+                app:layout_constraintTop_toBottomOf="@+id/graphqlErrorsTitle"
+                tools:text="Limit must be a non-negative integer" />
 
             <com.pluto.plugins.network.internal.interceptor.ui.components.ResponseStub
                 android:id="@+id/response"
@@ -138,7 +178,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/pluto___margin_medium"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/url"
+                app:layout_constraintTop_toBottomOf="@+id/graphqlErrors"
                 tools:visibility="visible" />
 
             <com.pluto.plugins.network.internal.interceptor.ui.components.RequestStub

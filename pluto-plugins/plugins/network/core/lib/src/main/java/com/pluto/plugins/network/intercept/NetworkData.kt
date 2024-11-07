@@ -17,6 +17,7 @@ class NetworkData {
         data class GraphqlData(
             val queryType: String,
             val queryName: String,
+            val variables: JSONObject,
         )
 
         val graphqlData: GraphqlData? = parseGraphqlData()
@@ -28,10 +29,12 @@ class NetworkData {
             ) return null
             val json = runCatching { JSONObject(body!!.body.toString()) }.getOrNull() ?: return null
             val query = json.optString("query") ?: return null
+            val variables = json.optJSONObject("variables") ?: JSONObject()
             val match = graqphlQueryRegex.find(query)?.groupValues ?: return null
             return GraphqlData(
                 queryType = match[1],
                 queryName = match[2],
+                variables = variables,
             )
         }
 
@@ -49,7 +52,8 @@ class NetworkData {
         val protocol: String = "",
         val fromDiskCache: Boolean = false,
     ) {
-        val hasGraphqlErrors = parseHasGraphqlErrors()
+        val graphqlErrors: List<String> = parseGraphqlErrors()
+        val hasGraphqlErrors get() = graphqlErrors.isNotEmpty()
 
         internal val status: Status
             get() = Status(statusCode, getStatusMessage())
@@ -61,13 +65,15 @@ class NetworkData {
         private fun getStatusMessage() = mapCode2Message(statusCode) +
             if (hasGraphqlErrors) ", Response with errors" else ""
 
-        private fun parseHasGraphqlErrors(): Boolean {
+        private fun parseGraphqlErrors(): List<String> {
             if (request.graphqlData == null ||
                 body == null ||
                 !body.isLikelyJson
-            ) return false
-            val json = runCatching { JSONObject(body!!.body.toString()) }.getOrNull() ?: return false
-            return json.has("errors")
+            ) return emptyList()
+            val json = runCatching { JSONObject(body!!.body.toString()) }.getOrNull() ?: return emptyList()
+            val errors = json.optJSONArray("errors") ?: return emptyList()
+            return (0 until errors.length())
+                .mapNotNull { errors.optJSONObject(it)?.optString("message") }
         }
     }
 
