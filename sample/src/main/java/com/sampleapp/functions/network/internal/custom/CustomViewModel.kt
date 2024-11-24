@@ -12,23 +12,21 @@ class CustomViewModel : ViewModel() {
     @SuppressWarnings("MagicNumber")
     fun customTrace() {
         viewModelScope.launch {
-            val request = NetworkData.Request(
-                url = "https://google.com",
-                method = "GET",
-                body = NetworkData.Body(
-                    body = "{\"message\": \"body\"}",
-                    contentType = "application/json",
-                ),
-                headers = emptyMap(),
-                sentTimestamp = System.currentTimeMillis()
-            )
             val networkInterceptor = NetworkInterceptor.intercept(
-                request,
+                NetworkData.Request(
+                    url = "https://google.com",
+                    method = "GET",
+                    body = NetworkData.Body(
+                        body = "{\"message\": \"body\"}",
+                        contentType = "application/json",
+                    ),
+                    headers = emptyMap(),
+                    sentTimestamp = System.currentTimeMillis()
+                )
             )
             delay(5_000)
             networkInterceptor.onResponse(
                 NetworkData.Response(
-                    request = request,
                     statusCode = 503,
                     body = NetworkData.Body(
                         body = "body",

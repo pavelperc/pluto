@@ -43,38 +43,20 @@ class NetworkData {
     }
 
     data class Response(
-        val request: Request,
         private val statusCode: Int,
         val body: Body?,
         val headers: Map<String, String?>,
         val sentTimestamp: Long,
         val receiveTimestamp: Long,
         val protocol: String = "",
-        val fromDiskCache: Boolean = false,
+        val fromDiskCache: Boolean = false
     ) {
-        val graphqlErrors: List<String> = parseGraphqlErrors()
-        val hasGraphqlErrors get() = graphqlErrors.isNotEmpty()
-
         internal val status: Status
-            get() = Status(statusCode, getStatusMessage())
+            get() = Status(statusCode, mapCode2Message(statusCode))
         val isSuccessful: Boolean
-            get() = statusCode in 200..299 && !hasGraphqlErrors
+            get() = statusCode in 200..299
         internal val isGzipped: Boolean
             get() = headers["Content-Encoding"].equals("gzip", ignoreCase = true)
-
-        private fun getStatusMessage() = mapCode2Message(statusCode) +
-            if (hasGraphqlErrors) ", Response with errors" else ""
-
-        private fun parseGraphqlErrors(): List<String> {
-            if (request.graphqlData == null ||
-                body == null ||
-                !body.isLikelyJson
-            ) return emptyList()
-            val json = runCatching { JSONObject(body!!.body.toString()) }.getOrNull() ?: return emptyList()
-            val errors = json.optJSONArray("errors") ?: return emptyList()
-            return (0 until errors.length())
-                .mapNotNull { errors.optJSONObject(it)?.optString("message") }
-        }
     }
 
     data class Body(

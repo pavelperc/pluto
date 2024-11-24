@@ -127,7 +127,6 @@ internal class DetailsFragment : Fragment(R.layout.pluto_network___fragment_deta
     private val detailsObserver = Observer<DetailContentData> {
         setupStatusView(it.api)
         val graphqlData = it.api.request.graphqlData
-        val graphqlErrors = it.api.response?.graphqlErrors ?: emptyList()
         binding.graphqlIcon.isVisible = graphqlData != null
         if (graphqlData != null) {
             binding.method.text = "${graphqlData.queryType.uppercase()} ${graphqlData.queryName}"
@@ -136,9 +135,6 @@ internal class DetailsFragment : Fragment(R.layout.pluto_network___fragment_deta
             binding.method.text = it.api.request.method.uppercase()
             binding.url.text = Url(it.api.request.url).toString()
         }
-        binding.graphqlErrorsTitle.isVisible = graphqlErrors.isNotEmpty()
-        binding.graphqlErrors.isVisible = graphqlErrors.isNotEmpty()
-        binding.graphqlErrors.text = graphqlErrors.joinToString("\n")
 
         binding.overview.apply {
             visibility = VISIBLE

@@ -36,9 +36,8 @@ internal fun Request.headerMap(contentLength: Long): Map<String, String?> {
     return map
 }
 
-internal fun Response.convert(request: NetworkData.Request, body: NetworkData.Body?): NetworkData.Response {
+internal fun Response.convert(body: NetworkData.Body?): NetworkData.Response {
     return NetworkData.Response(
-        request = request,
         statusCode = code,
         body = body,
         protocol = protocol.name,

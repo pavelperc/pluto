@@ -24,8 +24,7 @@ class PlutoOkhttpInterceptor {
 
         override fun intercept(chain: Interceptor.Chain): Response {
             val request = chain.request()
-            val convertedRequest = request.convert()
-            val networkInterceptor = NetworkInterceptor.intercept(convertedRequest, NetworkInterceptor.Option(NAME))
+            val networkInterceptor = NetworkInterceptor.intercept(request.convert(), NetworkInterceptor.Option(NAME))
             val response: Response = try {
                 val builder = request.newBuilder().url(networkInterceptor.actualOrMockRequestUrl)
                 chain.proceed(builder.build())
@@ -33,18 +32,18 @@ class PlutoOkhttpInterceptor {
                 networkInterceptor.onError(e)
                 throw e
             }
-            return response.processBody(convertedRequest) { networkInterceptor.onResponse(it) }
+            return response.processBody { networkInterceptor.onResponse(it) }
         }
     }
 }
 
-private fun Response.processBody(request: NetworkData.Request, onComplete: (NetworkData.Response) -> Unit): Response {
+private fun Response.processBody(onComplete: (NetworkData.Response) -> Unit): Response {
     if (!hasBody()) {
-        onComplete.invoke(convert(request, null))
+        onComplete.invoke(convert(null))
         return this
     }
     val responseBody: ResponseBody = body as ResponseBody
-    val sideStream = ReportingSink(PlutoInterface.files.createFile(), ResponseReportingSinkCallback(this, request, onComplete))
+    val sideStream = ReportingSink(PlutoInterface.files.createFile(), ResponseReportingSinkCallback(this, onComplete))
     val processedResponseBody: ResponseBody = DepletingSource(TeeSource(responseBody.source(), sideStream))
         .buffer()
         .asResponseBody(responseBody)
