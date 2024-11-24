@@ -25,7 +25,7 @@ class NetworkData {
         private fun parseGraphqlData(): GraphqlData? {
             if (method != "POST" ||
                 body == null ||
-                !body.isLikelyJson
+                !body.isJson
             ) return null
             val json = runCatching { JSONObject(body!!.body.toString()) }.getOrNull() ?: return null
             val query = json.optString("query") ?: return null
@@ -69,7 +69,7 @@ class NetworkData {
         internal val isBinary: Boolean = BINARY_MEDIA_TYPES.contains(mediaType)
         val sizeInBytes: Long = body.length.toLong()
         internal val mediaTypeFull: String = "$mediaType/$mediaSubtype"
-        val isLikelyJson get() = !isBinary && body.startsWith('{')
+        val isJson get() = mediaTypeFull == "application/json"
     }
 
     companion object {
